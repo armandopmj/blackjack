@@ -32,19 +32,12 @@
     };
 
     Hand.prototype.scores = function() {
-      var Aces, hasAce, numAces, score;
+      var hasAce, score;
       hasAce = this.reduce(function(memo, card) {
         return memo || card.get('value') === 1;
       }, false);
-      Aces = this.filter(function(c) {
-        if (c.get('revealed' && c.get('value' === 1))) {
-          return c;
-        }
-      });
-      numAces = Aces.length;
-      console.log(Aces);
       score = this.reduce(function(score, card) {
-        return score + (card.get('revealed') ? card.get('rank') : 0);
+        return score + (card.get('revealed') ? card.get('value') : 0);
       }, 0);
       if (hasAce && score + 10 <= 21) {
         return [score + 10];

@@ -10,9 +10,11 @@ class window.App extends Backbone.Model
     playerFinalScore = (@get 'playerHand').scores()
     (@get 'dealerHand').models[0].flip()
 
-    (@get 'dealerHand').hit() while( (@get 'dealerHand').scores() < 17 )
+    (@get 'dealerHand').hit() while (@get 'dealerHand').scores() < 17
+
     houseFinalScore = (@get 'dealerHand').scores()
 
-    if playerFinalScore > houseFinalScore then @.trigger( 'playerWon', @ )
+    if houseFinalScore > 21 then @.trigger( 'playerWon', @ )
+    else if playerFinalScore > houseFinalScore then @.trigger( 'playerWon', @ )
     else @.trigger( 'playerLost', @ )
 

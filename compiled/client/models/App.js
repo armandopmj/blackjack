@@ -25,7 +25,9 @@
         (this.get('dealerHand')).hit();
       }
       houseFinalScore = (this.get('dealerHand')).scores();
-      if (playerFinalScore > houseFinalScore) {
+      if (houseFinalScore > 21) {
+        return this.trigger('playerWon', this);
+      } else if (playerFinalScore > houseFinalScore) {
         return this.trigger('playerWon', this);
       } else {
         return this.trigger('playerLost', this);

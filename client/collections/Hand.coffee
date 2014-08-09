@@ -21,12 +21,12 @@ class window.Hand extends Backbone.Collection
       memo or card.get('value') is 1
     , false
 
-    Aces = @filter ( c ) ->
-      if c.get 'revealed' and c.get 'value' == 1 then c
-    numAces = Aces.length
-    console.log Aces
+    # Aces = @filter ( c ) ->
+    #   if c.get 'revealed' and c.get 'value' == 1 then c
+    # numAces = Aces.length
+    # console.log Aces
     score = @reduce (score, card) ->
-      score + if card.get 'revealed' then card.get 'rank' else 0
+      score + if card.get 'revealed' then card.get 'value' else 0
     , 0
     if hasAce and score + 10 <= 21 then [score + 10] else [score]
 

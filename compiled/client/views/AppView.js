@@ -21,28 +21,24 @@
       }
     };
 
+    AppView.prototype.playerLost = function() {
+      return setTimeout((function() {
+        return alert("YOU LOST... Loser!!");
+      }), 200);
+    };
+
+    AppView.prototype.playerWon = function() {
+      return setTimeout((function() {
+        return alert("YOU WON!!");
+      }), 200);
+    };
+
     AppView.prototype.initialize = function() {
       this.render();
-      this.model.get('playerHand').on('playerLost', (function(_this) {
-        return function() {
-          return alert("YOU LOST... Loser!!");
-        };
-      })(this));
-      this.model.get('playerHand').on('playerWon', (function(_this) {
-        return function() {
-          return alert("YOU WON!!");
-        };
-      })(this));
-      this.model.on('playerLost', (function(_this) {
-        return function() {
-          return alert("YOU LOST... Loser!!");
-        };
-      })(this));
-      return this.model.on('playerWon', (function(_this) {
-        return function() {
-          return alert("YOU WON!!");
-        };
-      })(this));
+      this.model.get('playerHand').on('playerLost', this.playerLost);
+      this.model.get('playerHand').on('playerWon', this.playerWon);
+      this.model.on('playerLost', this.playerLost);
+      return this.model.on('playerWon', this.playerWon);
     };
 
     AppView.prototype.render = function() {
